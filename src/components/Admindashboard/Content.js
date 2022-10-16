@@ -415,7 +415,7 @@ export default function Content() {
 
                         <CardContent className="mt-0">
                             <Typography gutterBottom variant="h8" className='font-bold text-sm' component="div">
-                                Packages
+                                Pet Toy
                             </Typography>
                             <Typography gutterBottom variant="h16" className=' font-semibold text-xl' component="div">
                                 {dataPackage.length}
@@ -431,7 +431,7 @@ export default function Content() {
 
                         <CardContent className="mt-0">
                             <Typography gutterBottom variant="h8" className='font-bold text-sm' component="div">
-                                Areas
+                                Food
                             </Typography>
                             <Typography gutterBottom variant="h16" className=' font-semibold text-xl' component="div">
                                 {dataStation.length}
@@ -471,7 +471,7 @@ export default function Content() {
 
                         <CardContent className="mt-0">
                             <Typography gutterBottom variant="h8" className='font-bold text-sm' component="div">
-                                Delivery Man
+                                Admin
                             </Typography>
                             <Typography gutterBottom variant="h16" className=' font-semibold text-xl' component="div">
                                 {dataDeliveryMan.length}

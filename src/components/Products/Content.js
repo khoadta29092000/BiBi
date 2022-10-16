@@ -45,7 +45,7 @@ export default function Content() {
             try {
         
              
-              const requestURL = `http://www.subcriptionmilk.somee.com/api/Stations/Getallstations?search=${search}`;
+              const requestURL = `http://www.bibi.somee.com/api/Product?search=${search}`;
         
               const response = await fetch(requestURL, {
                 method: `GET`,
@@ -95,7 +95,7 @@ export default function Content() {
 
             <div className="grid grid-cols-3 mt-8 pt-12 clear-both">
                
-                {postlist.map((post, index) => {
+                {dataAreas.map((post, index) => {
 
                     return (
                         <div key={post.id} className='justify-center items-center mx-auto mb-16 '>
@@ -124,7 +124,7 @@ export default function Content() {
                                             name: post,
                                         }
                                     }} ><Typography variant="h5" > {post?.title.length <= 20 ? post?.title : post?.title.slice(0, 20).concat("...")} </Typography></Link>
-                                      <Typography className="font-bold mt-3">{post.price}</Typography>
+                                      <Typography className="font-bold mt-3">{post.price}.000d</Typography>
                                 </CardContent>
                                   
                               

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useHistory, } from 'react-router-dom'
 
 
 import Breadcrumbs from '@mui/material/Breadcrumbs';
@@ -26,10 +26,19 @@ import CardMedia from '@mui/material/CardMedia';
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import { Heading3 } from "@material-tailwind/react";
+import TextField from '@mui/material/TextField';
 export default function Content(props) {
+    async function addCart(prop) {
+   
+        localStorage.setItem(`item=${location?.state?.name?.productId}`, location?.state?.name?.productId);
+        localStorage.setItem(`quantityId=${location?.state?.name?.productId}`, quantity);
+      }
+      const [quantity, setQyantity] = useState("");
     const [dataAreas, setDataAreas] = useState([]);
+    const [dataAreas1, setDataAreas1] = useState([]);
+    let location = useLocation()
     const [openHidden, setOpenHidden] = useState(false);
-    console.log("0000000000000000", props?.location);
+    console.log("0000000000000000", location.state.name.title);
     const [search, setSearch] = useState("");
     var sameBLog = [
         { id: 1, image: "https://bucket.nhanh.vn/store4/127854/ps/20220902/02092022110932_6e41864988e04dbe14f1.jpg", price: "120.000đ", title: "Thức ăn cho chó", location: "139-141 Nguyễn Gia Trí, P.25, Q.Bình Thạnh, TP. Hồ Chí Minh" },
@@ -43,6 +52,31 @@ export default function Content(props) {
             { id: 3, title: "Ocen City", location: "1311 Ông Cao Thắng, P.Tân Kì, Q.10, TP. Hồ Chí Minh" },
             { id: 4, title: "Ceberus", location: "15 Gò Xoài, P.An Đới, Q.Tân Phú, TP. Hồ Chí Minh" },
             { id: 5, title: "SBTC Entertainment", location: "415 Lê Văn Việt, P.Tân Thành, Q.9, TP. Thủ Đức" },]
+            async function featchStation1ist() {
+                try {
+            
+                 
+                  const requestURL = `http://www.bibi.somee.com/api/Product?search=${search}`;
+            
+                  const response = await fetch(requestURL, {
+                    method: `GET`,
+                    headers: {
+                      'Content-Type': 'application/json',
+                     
+                    },
+                  });
+                  const responseJSON = await response.json();
+            
+                  const  data  = responseJSON;
+            
+                  setDataAreas1(responseJSON.data)
+                
+               console.log("aa fetch", responseJSON.data)
+            
+                } catch (error) {
+                  console.log('Fail to fetch product list: ', error)
+                }
+              }
         async function featchStationist() {
             try {
         
@@ -71,6 +105,7 @@ export default function Content(props) {
     
     useEffect(() => {
         featchStationist();
+        featchStation1ist();
     }, [search]);
    
     const callbackFunction = (childData, alert) => {
@@ -102,16 +137,18 @@ export default function Content(props) {
 </Card>
 </div>
 <div className="col-span-2 ">
-   <Heading3>Thức ăn cho chó</Heading3>
-   <p className="mb-2">Thương hiệu: Kota | Mã sp: 01</p>
+   <Heading3>{location?.state?.name?.title}</Heading3>
+   <p className="mb-2">Thương hiệu: Kota | Mã sp: {location?.state?.name?.productId}</p>
    <hr></hr>
-   <p className="text-2xl font-semibold my-2">400.000 đ</p>
+   <p className="text-2xl font-semibold my-2">{location?.state?.name?.price}</p>
    <hr></hr>
    <p className=" my-2">điện thoại hỗ trợ: 0335739928</p>
    <hr></hr>
    <p className="font-semibold mt-2">số lượng</p>
-    <input className="border-black border-2 h-8 w-24"></input>
-    <button className="ml-4 h-8 w-44 bg-yellow-300">Thêm vào giỏ hàng</button> 
+   <div className='max-w-5xl mb-8 mt-2 mx-auto'>
+                            <TextField className='border-black border-2 h-8 w-24' onChange={e => setQyantity(e.target.value)} defaultValue="" autoComplete='off' id="outlined-basic" label="Quantity" variant="outlined" />
+                        </div>
+    <button  className=" h-8 w-44 bg-yellow-300" onClick={() => addCart(location?.state?.name)}>Thêm vào giỏ hàng</button> 
     <button className="ml-4 h-8 w-44 bg-yellow-300">yêu thích sản phẩm</button>
 </div>
 </div>
@@ -119,7 +156,7 @@ export default function Content(props) {
                         <h2 className="ml-2 font-bold mb-12 text-2xl"> sản phẩm liên quan</h2>
                     </div>
                     <div className=" mx-64 grid grid-cols-4 gap-12 ">
-                        {sameBLog.map((blog, index) => {
+                        {dataAreas1.map((blog, index) => {
                             return (
                                 <Card key={blog.id} sx={{ minWidth: 125 }} >
                                     <CardMedia

@@ -156,17 +156,14 @@ export default function Content() {
     function createData(data) {
         let Title = data.title;
         let Category;
-        let Supplier;
+        let Quantity = data.quantity
+        
         dataCate.map((cate, index) => {
-            if (data.categoryId == cate.id) {
+            if (data.categoryId == data.categoryId) {
                 return Category = cate.title
             }
         })
-        dataSupplier.map((sup, index) => {
-            if (data.supplierId == sup.id) {
-                return Supplier = sup.Title
-            }
-        })
+     
         let Image = (
             <img
                 src={data.image}
@@ -180,7 +177,7 @@ export default function Content() {
             <DeleteIcon />
         </button>);
 
-        return { Image, Title, Category, Supplier, Edit, Delete };
+        return { Image, Title, Category, Quantity, Edit, Delete };
     }
     useEffect(() => {
 
@@ -239,7 +236,7 @@ export default function Content() {
         try {
 
 
-            const requestURL = `http://www.subcriptionmilk.somee.com/api/Categories/Getallcategories`;
+            const requestURL = `http://www.bibi.somee.com/api/Category`;
 
             const response = await fetch(requestURL, {
                 method: `GET`,
@@ -264,7 +261,7 @@ export default function Content() {
         try {
 
 
-            const requestURL = `http://cinemasystem.somee.com/api/Film`;
+            const requestURL = `http://www.bibi.somee.com/api/Product?search=${search}`;
 
             const response = await fetch(requestURL, {
                 method: `GET`,
@@ -484,7 +481,7 @@ export default function Content() {
                                     <MenuItem value={""}>All</MenuItem>
                                     {dataCate.map((cate, index) => {
                                         return (
-                                            <MenuItem key={index} value={cate.id}>{cate.title}</MenuItem>
+                                            <MenuItem key={index} value={cate.categoryId}>{cate.title}</MenuItem>
                                         )
                                     })}
 

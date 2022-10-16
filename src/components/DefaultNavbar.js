@@ -27,7 +27,7 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 import logo from "../assets/img/logo.png"
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 
@@ -41,11 +41,19 @@ export default function DefaultNavbar() {
         featchProfile();
 
     }, []);
+    function parseJwt(token) {
+        if (!token) { return; }
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base64));
+    }
+    let id = parseJwt(localStorage.getItem('token'))
+    console.log("222", id)
     async function featchProfile() {
         try {
 
 
-            const requestURL = `http://www.subcriptionmilk.somee.com/api/Accounts/getbyid?id=${localStorage.getItem('id-token')}`;
+            const requestURL = `http://www.bibi.somee.com/api/User/${id.MemberId}`;
 
             const response = await fetch(requestURL, {
                 method: `GET`,
@@ -86,7 +94,7 @@ export default function DefaultNavbar() {
         }
     }
     function handleLogoutClick() {
-        localStorage.removeItem('user-token');
+        localStorage.removeItem('token');
         window.location.reload();
     }
 
@@ -104,11 +112,11 @@ export default function DefaultNavbar() {
     let buttonSignIn;
     let buttonSingUp;
     let img;
-    if (localStorage.getItem(`user-token`)) {
+    if (localStorage.getItem(`token`)) {
         img = (
             <div>
-                {profileList.map(item => {
-                    return (
+              
+                  
                         <Button1
                             ref={anchorRef}
                             id="composition-button"
@@ -121,12 +129,12 @@ export default function DefaultNavbar() {
                             ripple="dark"
                         >
                             <Stack direction="row" spacing={2}>
-                                <Avatar alt="Cindy Baker" src={item.avatar} />
+                                <Avatar alt="Cindy Baker" src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg" />
                             </Stack>
-                            <Typography color="White" className='pl-2'>{item.fullname}</Typography>
+                            <Typography color="White" className='pl-2'>{profileList.email}</Typography>
                         </Button1>
-                    )
-                })}
+                    
+                
 
                 <Popper
                     open={open}
@@ -228,7 +236,7 @@ export default function DefaultNavbar() {
             <NavbarContainer>
                 <NavbarWrapper>
 
-                    <NavbarBrand className=""><h2 className='h-full text-2xl tracking-widest'>FBT</h2></NavbarBrand>
+                    <NavbarBrand className=""><h2 className='h-full text-2xl tracking-widest'>BiBi</h2></NavbarBrand>
 
                     <NavbarToggler
                         className="hidden"
@@ -323,33 +331,17 @@ export default function DefaultNavbar() {
                                     </Link>
                                 </Dropdown>
                             </div>
-                            <Dropdown
-                                color="transparent"
-                                size="sm"
-                                buttonType="link"
-                                buttonText={
-                                    <div className="py-2.5 font-medium flex items-center">
+                            <Link to="/Cart">
+                                <NavLink
 
-                                        <SearchIcon className='text-white cursor-pointer  mb-5 lg:mb-0 mb ' />
-                                    </div>
-                                }
-                                ripple="light"
-                            >
-                                <Paper
-                                    component="form"
-                                    sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+
+                                    rel="noreferrer"
+                                    ripple="light"
                                 >
-                                    <InputBase
-                                        sx={{ ml: 1, flex: 1 }}
-                                        placeholder="Search Products"
-                                        inputProps={{ 'aria-label': 'Search Product' }}
-                                    />
-                                    <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-                                        <SearchIcon />
-                                    </IconButton>
-
-                                </Paper>
-                            </Dropdown>
+                                    <ShoppingCartIcon />
+                                  
+                                </NavLink>
+                            </Link>
                             {buttonSignIn}
 
                             {img}

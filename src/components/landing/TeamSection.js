@@ -46,7 +46,7 @@ export default function TeamSection() {
             </div>
             <div className='grid lg:grid-cols-2  grid-cols-1 text-left bg-gray-100 justify-items-center w-full pt-20   px-4'>
                 <div>
-                    <img src="https://www.farmlyfresh.com/wp-content/uploads/2020/04/farm-cow-n.png" />
+                    <img src="https://bucket.nhanh.vn/store4/127854/bn/ab9f444c59c49b9ac2d5.jpg" className='w-500 h-96 mb-20' />
                 </div>
                 <div className=''>
                     <h2 className='font-bold text-5xl mb-5 pt-2'>Our Journey so Far</h2>

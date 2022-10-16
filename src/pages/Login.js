@@ -43,7 +43,7 @@ export default function Login() {
             email,
             password
         };
-        let res = await fetch(`http://www.subcriptionmilk.somee.com/api/FirebaseServices/loginadmin?email=${email}&password=${password}`, {
+        let res = await fetch(`http://www.bibi.somee.com/api/User/Login`, {
             method: `POST`,
             headers: {
                 'Content-Type': 'application/json',
@@ -56,8 +56,8 @@ console.log("--------------", result.statusCode)
             if (result?.statusCode == 200) {
                 
                 history.push("/")
-                localStorage.setItem("user-token", result?.uidfb);
-                localStorage.setItem("id-token", result?.iddb);
+
+                localStorage.setItem("token", result?.data);
             }
            
 

@@ -212,7 +212,7 @@ export default function Content() {
         try {
     
          
-          const requestURL = `http://www.subcriptionmilk.somee.com/api/Categories/Getallcategories?search=${search}`;
+          const requestURL = `http://www.bibi.somee.com/api/Category?search=${search}`;
     
           const response = await fetch(requestURL, {
             method: `GET`,

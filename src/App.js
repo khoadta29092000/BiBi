@@ -30,7 +30,7 @@ import ProfileDashboard from 'pages/ProfileDashboard';
 
 import Products from 'pages/Products';
 import ProductDetails from 'pages/ProductDetails';
-
+import Cart from 'pages/Cart';
 
 
 
@@ -53,7 +53,7 @@ function App() {
             <Route exact path="/AdminsManagement" component={Admin} />
             <Route exact path="/CategoriesManagement" component={CategoriesManagement} />
             <Route exact path="/ProductsManagement" component={ProductsManagement} />
-           
+            <Route exact path="/Cart" component={Cart} />
           
             <Route exact path="/text" component={CustomizedInputBase} />
             <Redirect from="*" to="/" />

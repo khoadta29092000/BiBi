@@ -19,11 +19,18 @@ export default function DefaultNavbarProfile() {
         featchProfile();
 
     }, []);
+    function parseJwt(token) {
+        if (!token) { return; }
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base64));
+    }
+    let id2 = parseJwt(localStorage.getItem('token'))
     async function featchProfile() {
         try {
 
 
-            const requestURL = `http://www.subcriptionmilk.somee.com/api/Accounts/getbyid?id=${localStorage.getItem('id-token')}`;
+            const requestURL = `http://www.bibi.somee.com/api/User/${id2.MemberId}`;
 
             const response = await fetch(requestURL, {
                 method: `GET`,
@@ -55,13 +62,11 @@ export default function DefaultNavbarProfile() {
 
                 <ul className="space-y-8">
                     <div className="w-40 h-52 mx-auto">
-                        {profileList.map(item => {
-                            return(
+                     
                                 <img
-                                src={item.avatar}    
+                                src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
                             />
-                            )
-                        })}
+                     
                      
                     </div>
 
